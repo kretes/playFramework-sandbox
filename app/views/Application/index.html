@@ -1,0 +1,26 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+#{set 'moreScripts'}
+<script type="text/javascript">
+  
+ $(document).ready(function(){
+   $("a").click(function(event){
+     $.post('@{Offers.add()}',  { name: $('#offerName').val()}, 
+		function(data) {
+  			$('#result').append(data, '<br/>');
+		}     
+     );	
+   });
+ });
+</script> 
+#{/set}
+
+<form>
+<input id="offerName"/>
+</form>
+<a href="#" id="addOffer">Dodaj ofertę</a>
+<form action="@{Offers.add()}" method="GET">
+    <input type="text" name="name" /> 
+    <input type="submit" value="Add Offer" />
+</form> 
+<div id="result"/>
